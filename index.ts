@@ -1,3 +1,4 @@
+// Imports and Element Selection: Imports utility functions, enums, and interfaces, and selects DOM elements
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
 import { Permissions , LoyaltyUser } from './enums'
 import { Review, Property } from './interfaces'
@@ -9,7 +10,7 @@ const footer = document.querySelector('.footer')
 
 let isLoggedIn: boolean
 
-// Reviews
+// Reviews Array
 const reviews: Review[] = [
     {
         name: 'Sheila',
@@ -31,6 +32,7 @@ const reviews: Review[] = [
     },
 ]
 
+// User Object
 const you = {
     firstName: 'Bobby',
     lastName: 'Brown',
@@ -40,7 +42,7 @@ const you = {
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-// Array of Properties
+// Properties Array
 const properties : Property[] = [
     {
         image: 'images/colombia-property.jpg',
@@ -97,11 +99,14 @@ const properties : Property[] = [
 ]
 
 // Functions
+// showReviewTotal and populateUser: Update the DOM based on the reviews and user information
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
 populateUser(you.isReturning, you.firstName)
 
-// Add the properties
+// Adding Properties and Reviews: Dynamically creates and adds property and review cards to the DOM
+
+// Adding Properties to the DOM
 for (let i = 0; i < properties.length; i++) {
     const card = document.createElement('div')
     card.classList.add('card')
@@ -113,6 +118,7 @@ for (let i = 0; i < properties.length; i++) {
     propertyContainer.appendChild(card)
 }
 
+// Adding Reviews to the DOM
 let count = 0
 function addReviews(array : Review[]) : void {
     if (!count ) {
@@ -130,10 +136,13 @@ function addReviews(array : Review[]) : void {
 
 button.addEventListener('click', () => addReviews(reviews))
 
+// Current Location Display
+// Updates the footer with the current location and temperature
 let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
-// Classes
+// MainProperty Class
+// Defines a class to represent a main property and displays its image in the DOM
 class MainProperty {
     src: string
     title: string
@@ -155,6 +164,7 @@ let yourMainProperty = new MainProperty(
         date: '12-04-2021'
     }] )
 
+// Displaying Main Property Image
 const mainImageContainer = document.querySelector('.main-image')
 const image = document.createElement('img')
 image.setAttribute('src', yourMainProperty.src)
